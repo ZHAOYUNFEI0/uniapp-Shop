@@ -3,21 +3,23 @@
 			"^u-(.*)": "@/uni_modules/uview-ui/components/u-$1/u-$1.vue"
 		},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+	{
+		"path" : "pages/category/category",
+		"style" :                                                                                    
 		{
+			"navigationBarTitleText": "分类"
+		}
+		
+	}
+	,	
+	{
 			"path": "pages/index/index",
 			"style": {
+				"enablePullDownRefresh": true,
 				"navigationBarTitleText": "黑马优购"
 			}
 		}
 	    ,{
-            "path" : "pages/category/category",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "分类"
-            }
-            
-        }
-        ,{
             "path" : "pages/cart/cart",
             "style" :                                                                                    
             {
@@ -35,6 +37,7 @@
         }
     ],
 	"globalStyle": {
+		
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "黑马优购",
 		"navigationBarBackgroundColor": "#eb4450",

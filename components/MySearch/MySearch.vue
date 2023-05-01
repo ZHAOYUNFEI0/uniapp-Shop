@@ -19,5 +19,6 @@
 .my{
 	padding: 10rpx 25rpx;
 	background-color: #eb4450;
+	/* height: 88rpx; */
 }
 </style>
