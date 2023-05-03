@@ -15,7 +15,8 @@
 				<view class="group" v-for="item in rightList" :key="item.cat_id">
 					<view class="group_title">{{ item.cat_name }}</view>
 					<view class="group_list">
-						<navigator v-for="item2 in item.children" :key="item2.cat_id" url="">
+						<navigator v-for="item2 in item.children" :key="item2.cat_id"
+							:url="`/pages/goods_list/goods_list?cid=${item2.cat_id}&query=${item2.cat_name}`">
 							<image :src="item2.cat_icon" lazy-load mode="aspectFit" />
 							<text>{{ item2.cat_name }}</text>
 						</navigator>
@@ -55,7 +56,7 @@ export default {
 				this.getcateList = res.data.message
 				// console.log(this.getcateList);	
 			}
-			console.log(this.rightList);
+			// console.log(this.rightList);
 		}
 	},
 	computed: {
