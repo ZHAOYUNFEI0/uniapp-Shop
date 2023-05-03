@@ -1,5 +1,3 @@
-const { async } = require("../../dist/dev/mp-weixin/common/vendor")
-
 // 请求基地址
 const baseURL = 'https://api-hmugo-web.itheima.net/api/public/v1'
 
