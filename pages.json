@@ -37,6 +37,7 @@
             "path" : "pages/goods_detail/goods_detail",
             "style" :                                                                                    
             {
+				"navigationStyle": "custom",
                 "navigationBarTitleText": "商品详情"
             }
             
@@ -45,6 +46,7 @@
             "path" : "pages/goods_list/goods_list",
             "style" :                                                                                    
             {
+				"enablePullDownRefresh":true,
                 "navigationBarTitleText": "商品列表"
             }
             

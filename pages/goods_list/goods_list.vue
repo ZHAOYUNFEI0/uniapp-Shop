@@ -3,13 +3,14 @@
         <MySearch></MySearch>
         <u-tabs :list="list1" lineColor="#EB4450" :scrollable="false"></u-tabs>
         <view class="goods_list">
-            <view class="goods_item" v-for="item in goodsList" :key="item.goods_id">
+            <navigator :url="`/pages/goods_detail/goods_detail?goods_id=${item.goods_id}`" class="goods_item"
+                v-for="item in goodsList" :key="item.goods_id">
                 <image class="goods_images" :src="item.goods_big_logo || doImage" mode="aspectFit" />
                 <view class="goods_info">
                     <view class="goods_title">{{ item.goods_name }}</view>
                     <view class="goods_price">{{ item.goods_price }}</view>
                 </view>
-            </view>
+            </navigator>
         </view>
     </view>
 </template>
@@ -23,7 +24,8 @@ export default {
             doImage: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg9.doubanio.com%2Fview%2Fgroup_topic%2Fl%2Fpublic%2Fp443184895.jpg&refer=http%3A%2F%2Fimg9.doubanio.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1685701028&t=141a28d68a3723b3452880e4b3c711a4',
             queryParams: {},
             goodsList: [],
-            list1: [{ name: '综合' }, { name: '销量' }, { name: '价格' }]
+            list1: [{ name: '综合' }, { name: '销量' }, { name: '价格' }],
+            total: 0
         };
     },
     onLoad(query) {
@@ -35,11 +37,27 @@ export default {
             pagesize: 20
         }
         // console.log(this.queryParams);
+
         this.getGoodsList();
     },
+
+    // 下拉刷新
+    async onPullDownRefresh() {
+        this.goodsList = []
+        this.getGoodsList();
+        await Promise.all([this.getGoodsList()])
+
+        // 关闭下拉刷新
+        uni.stopPullDownRefresh()
+    },
+    // 触底加载
     onReachBottom() {
+        if (this.goodsList.length >= this.total) {
+            return
+        }
         this.queryParams.pagenum++,
             this.getGoodsList()
+
     },
     methods: {
         async getGoodsList() {
@@ -48,6 +66,7 @@ export default {
 
             this.goodsList.push(...res.data.message.goods)
             // console.log(this.goodsList);
+            this.total = res.data.message.total
         }
     }
 };
