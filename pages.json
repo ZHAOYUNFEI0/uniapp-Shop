@@ -49,8 +49,14 @@
 				"enablePullDownRefresh":true,
                 "navigationBarTitleText": "商品列表"
             }
-            
-        }
+        },
+		{
+			"path" : "pages/pay/pay",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "支付"
+            }
+		}
     ],
 	"globalStyle": {
 		
