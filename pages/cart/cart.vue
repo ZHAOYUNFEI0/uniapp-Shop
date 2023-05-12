@@ -1,16 +1,23 @@
 <template>
 	<view>
-		<view class="cart_item">
-			<navigator :url="`/pages/goods_detail/goods_detail?goods_id=${item.goods_id}`" class="goods_item"
-				v-for="item in cartList" :key="item.goods_id">
-
-				<!-- 商品图片 -->
-				<image class="goods_images" :src="item.goods_small_logo || doImage" mode="aspectFit" />
-				<view class="goods_info">
-					<view class="goods_title">{{ item.goods_name }}</view>
-					<view class="goods_price">{{ item.goods_price }}</view>
+		<view class="goods_item">
+			<view class="cart_item" v-for="item in cartList" :key="item.goods_id">
+				<radio :checked="item.goods_select" color="red" />
+				<view class="cart_count">
+					<u-number-box :value="item.goods_count"></u-number-box>
 				</view>
-			</navigator>
+
+				<navigator hover-class="none" :url="`/pages/goods_detail/goods_detail?goods_id=${item.goods_id}`"
+					class="goods_item">
+
+					<!-- 商品图片 -->
+					<image class="goods_images" :src="item.goods_small_logo || doImage" mode="aspectFit" />
+					<view class="goods_info">
+						<view class="goods_title">{{ item.goods_name }}</view>
+						<view class="goods_price">{{ item.goods_price }}</view>
+					</view>
+				</navigator>
+			</view>
 		</view>
 	</view>
 </template>
@@ -36,6 +43,20 @@ export default {
 
 <style lang="scss">
 .cart_item {
+	display: flex;
+	align-items: center;
+	padding-left: 20rpx;
+	border-bottom: 1rpx solid #ddd;
+	position: relative;
+
+	.cart_count {
+		position: absolute;
+		background-color: pink;
+		bottom: 20rpx;
+		right: 20rpx;
+		padding: 20rpx;
+	}
+
 	.goods_item {
 		display: flex;
 		border-bottom: 1rpx solid #ddd;

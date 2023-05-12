@@ -46,9 +46,9 @@
             </view>
             <view class="icon_group">
                 <u-icon name="shopping-cart" color="#434343" size="34rpx"></u-icon>
-                <view>购物车</view>
+                <view @click="hjia">购物车</view>
             </view>
-            <view class="btn">加入购物车</view>
+            <view class="btn" @click="hAdd">加入购物车</view>
             <view class="btn">立即购买</view>
         </view>
     </view>
@@ -68,6 +68,7 @@ export default {
         // console.log(query);
         this.goods_id = query.goods_id
         this.getGoodsDetail()
+
     },
     methods: {
         async getGoodsDetail() {
@@ -75,6 +76,7 @@ export default {
             // console.log(res);
             this.goodsInfo = res.data.message
             this.goodsInfo.goods_introduce = this.goodsInfo.goods_introduce.replace(/<img/g, '<img class="img"')
+            // console.log(res);
         },
         hShowImage(current) {
             // console.log(current);
@@ -83,6 +85,35 @@ export default {
             uni.previewImage({
                 current,
                 urls
+            })
+        },
+        hAdd() {
+            const newList = [...this.$store.state.cartList]
+            // console.log(newList);
+            const index = newList.findIndex(item => item.goods_id === Number(this.goods_id))
+            console.log(index);
+            console.log(newList[0].goods_id);
+            console.log(Number(this.goods_id));
+            if (index >= 0) {
+                newList[index].goods_count += 1
+                this.$store.commit('setCartList', newList)
+            } else {
+                newList.push({
+                    goods_id: this.goodsInfo.goods_id,
+                    goods_small_logo: this.goodsInfo.goods_small_logo,
+                    goods_name: this.goodsInfo.goods_name,
+                    goods_price: this.goodsInfo.goods_price,
+                    goods_count: 1,
+                    goods_select: true
+                })
+                this.$store.commit('setCartList', newList)
+            }
+
+        },
+        hjia() {
+            // console.log(1111);
+            wx.switchTab({
+                url: '/pages/cart/cart'
             })
         }
     },
