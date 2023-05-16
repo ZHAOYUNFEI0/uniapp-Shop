@@ -6,13 +6,21 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
     // 初始化
     state: {
-        cartList:uni.getStorageSync('cartList')
+        cartList: uni.getStorageSync('cartList'),
+        userProfile:uni.getStorageSync('userProfile') || {}
     },
     mutations: {
         setCartList(state, val) {
+            // 更新购物车数据
             state.cartList = val
             uni.setStorageSync('cartList',val)
+        },
+        // 保存用户信息，包含token
+        setUserProfile(state, payload) {
+            state.userProfile = payload
+            uni.setStorageSync('userProfile',payload)
         }
+
     },
     getters: {
         isShowAll(state) {

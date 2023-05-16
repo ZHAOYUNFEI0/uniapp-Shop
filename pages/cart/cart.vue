@@ -1,5 +1,6 @@
 <template>
 	<view>
+		<!-- 商品 -->
 		<view class="goods_item">
 			<view class="cart_item" v-for="item in cartList" :key="item.goods_id">
 				<radio @click="isShow(item.goods_id)" :checked="item.goods_select" color="red" />
@@ -19,6 +20,7 @@
 				</navigator>
 			</view>
 		</view>
+		<!-- 底部按钮导航栏 -->
 		<view class="bottom_bar">
 			<view class="select">
 				<radio @click="isShows" :checked="isShowAll" color="#eb4450" />
